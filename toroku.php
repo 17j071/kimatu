@@ -1,3 +1,11 @@
+<?php 
+    session_start();
+?>
+<!DOCTYPE html>
+<head>
+    <title>会員登録</title>
+</head>
+<body>
 <h1>会員登録</h1> 
 <p><?php echo date('Y/m/d H:i:s'); ?></p>
 <form action="member_add.php" method="post">
@@ -6,6 +14,7 @@
 パスワード<input type="password" name="pass"><br>
 <input type="submit" value="登録"> 
 </form>
+</body>
 
 <!-- 後で揃える
 <ul>

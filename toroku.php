@@ -21,6 +21,7 @@
 パスワード<input type="password" name="pass"><br>
 <input type="submit" value="登録"> 
 </form>
+<a href="index.php">戻る</a>
 </body>
 
 <!-- 後で揃える

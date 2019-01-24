@@ -41,17 +41,18 @@
         try{ 
             $dbh = new PDO($dsn, $user, $password); 
             $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-            $sql = "INSERT INTO members (name, email, password, created) VALUE (:name, :email, :password, :created)"; 
-            $stmt = $dbh->prepare($sql); 
-            $stmt->bindValue(':name', $name, PDO::PARAM_STR); 
-            $stmt->bindValue(':email', $email, PDO::PARAM_STR); 
-            $stmt->bindValue(':password', $pass, PDO::PARAM_STR); 
+            $stmt = $dbh->prepare('INSERT INTO members SET name=?,email=?,password=?, picture=?, created=NOW()'); 
+            //$stmt = $dbh->prepare($sql); 
+            $stmt->bindValue(1, $name, PDO::PARAM_STR); 
+            $stmt->bindValue(2, $email, PDO::PARAM_STR); 
+            $stmt->bindValue(3, $pass, PDO::PARAM_STR); 
+            $stmt->bindValue(4, "", PDO::PARAM_STR); 
             
-            $now = date('Y/m/d H:i:s');
+            //$now = date('Y/m/d H:i:s');
             
-            $stmt->bindValue(':created', $now, PDO::PARAM_STR); 
+            //$stmt->bindValue(':created', $now, PDO::PARAM_STR); 
             $stmt->execute(); 
-            header( "Location: ./index.php" ) ;
+            header( "Location: ./toroku_complete.php" ) ;
             echo '処理が終了しました。';
         }catch (PDOException $e){ 
             echo($e->getMessage()); 

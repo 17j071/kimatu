@@ -4,3 +4,4 @@
 パスワード<input type="password" name="pass"><br>
 <input type="submit" value="ログイン"> 
 </form>
+<a href="toroku.php">会員登録</a>

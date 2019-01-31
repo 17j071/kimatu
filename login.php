@@ -26,6 +26,7 @@
         $name = "";
         foreach ($stmt as $data) {
             //$LoginNinsyoLowCount = $data['rowcount'];
+            $id = $data['id'];
             $name = $data['name'];
         }
         

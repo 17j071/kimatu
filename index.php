@@ -1,6 +1,19 @@
-<h1>ログイン</h1> 
+<?php
+    session_start();
+    $mail = "";
+?>
+<h1>ログイン</h1>
+<p>
+    <?php
+        if (isset($_SESSION["errorMessage"])) {
+            echo $_SESSION["errorMessage"];
+            $mail = $_SESSION["mail"];
+        }
+    ?>
+</p>
+
 <form action="login.php" method="post">
-メールアドレス<input type="text" name="mail"><br>
+メールアドレス<input type="text" name="mail" value="<?php echo $mail ?>"><br>
 パスワード<input type="password" name="pass"><br>
 <input type="submit" value="ログイン"> 
 </form>

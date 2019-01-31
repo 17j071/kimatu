@@ -11,20 +11,36 @@
     $user = 'root'; 
     $password = ''; 
     
+    $LoginNinsyoLowCount = 0;
+    $errorMessage = "";
     try{ 
         $dbh = new PDO($dsn, $user, $password); 
         $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
-        $stmt = $dbh->prepare('INSERT INTO members SET email=?,password=?'); 
+        $stmt = $dbh->prepare('SELECT * FROM members WHERE email=? AND password=?');
+        //$stmt = $dbh->prepare('SELECT COUNT(*) AS rowcount,name FROM members WHERE email=? AND password=?');
         //$stmt = $dbh->prepare($sql); 
-        $stmt->bindValue(1, $emil, PDO::PARAM_STR); 
-        $stmt->bindValue(3, $pass, PDO::PARAM_STR); 
+        $stmt->bindValue(1, $email, PDO::PARAM_STR); 
+        $stmt->bindValue(2, $pass, PDO::PARAM_STR); 
+        $stmt->execute();
         
-        //$now = date('Y/m/d H:i:s');
+        $name = "";
+        foreach ($stmt as $data) {
+            //$LoginNinsyoLowCount = $data['rowcount'];
+            $name = $data['name'];
+        }
         
-        //$stmt->bindValue(':created', $now, PDO::PARAM_STR); 
-        $stmt->execute(); 
-        header( "Location: ./toroku_complete.php" ) ;
-        echo '処理が終了しました。';
+        //if($LoginNinsyoLowCount === 1){
+        if($name != ""){
+            $_SESSION['name'] = $name;
+            header( "Location: ./toppage.php" ) ;
+        }
+        else{
+            $errorMessage = "メールアドレスかパスワードが間違っています。";
+            $_SESSION['errorMessage'] = $errorMessage;
+            $_SESSION['mail'] = $email;
+            
+            header( "Location: ./index.php" ) ;
+        }
     }catch (PDOException $e){ 
         echo($e->getMessage()); 
         die(); 

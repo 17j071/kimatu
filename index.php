@@ -9,6 +9,12 @@
             echo $_SESSION["errorMessage"];
             $mail = $_SESSION["mail"];
         }
+        if (isset($_SESSION["name"])) {
+            header('Location: ./toppage.php');
+            exit;
+        }
+        
+        
     ?>
 </p>
 

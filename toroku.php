@@ -2,11 +2,20 @@
     session_start();
     $name = "";
     $mail = "";
-    if(isset($_GET['r']))
-    {
-        if(isset($_GET['name'])){ $name = $_GET['name']; } 
+    if(isset($_SESSION['nameError'])) { 
+        echo $_SESSION['nameError']; 
+        $_SESSION['nameError'] = "";
+    }
+    if(isset($_SESSION['mailError'])) { 
+        echo $_SESSION['mailError']; 
+        $_SESSION['mailError'] = "";
         
     }
+    if(isset($_SESSION['passError'])) { 
+        echo $_SESSION['passError'];
+        $_SESSION['passError'] = ""; 
+    }
+    
 ?>
 <!DOCTYPE html>
 <head>
@@ -14,8 +23,7 @@
 </head>
 <body>
 <h1>会員登録</h1> 
-<p><?php echo date('Y/m/d H:i:s'); ?></p>
-<form action="member_add.php" method="post">
+<form action="toroku_check.php" method="post">
 ニックネーム<input type="text" name="name" value=""><br>
 メールアドレス<input type="text" name="mail" value=""><br>
 パスワード<input type="password" name="pass"><br>

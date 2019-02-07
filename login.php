@@ -33,6 +33,7 @@
         //if($LoginNinsyoLowCount === 1){
         if($name != ""){
             $_SESSION['name'] = $name;
+            $_SESSION['member_id'] = $id;
             header( "Location: ./toppage.php" ) ;
         }
         else{

@@ -8,31 +8,6 @@
     htmlspecialchars($email, ENT_QUOTES, 'UTF-8');
     htmlspecialchars($pass, ENT_QUOTES, 'UTF-8');
     
-    $errorFlag = false;
-    $url = "./toroku.php?r=1";
-    
-    if($name == ""){
-        $errorFlag = true;
-        $url = $url."&name=1";
-    }
-    if($email == ""){
-        $errorFlag = true;
-        $url = $url."&mail=1";
-    }
-    if($pass == ""){
-        $errorFlag = true;
-        $url = $url."&pass0=1";
-    }
-    if(strlen ($pass)<4){
-        $errorFlag = true;
-        $url = $url."&pass4miman=1";
-    }
-    if($errorFlag){
-        header( "Location: ".$url );
-    	exit;
-    }
-    else
-    {    
         $pass = md5($pass);
         $dsn = 'mysql:dbname=mini_bbs;host=localhost;charset=utf8'; 
         $user = 'root'; 
@@ -58,5 +33,4 @@
             echo($e->getMessage()); 
             die(); 
         }
-    }
     
